@@ -77,6 +77,7 @@ Iterating over [follower, following] pairs and re-following each
 
 ```rb
 fs = FollowService.new
+ufs = UnfollowService.new
 rels = JSON.parse(File.read("/home/mastodon/woof->bear.json"))
 rels.each do |rel|
   follower, following = rel
@@ -88,6 +89,7 @@ rels.each do |rel|
   if follower_account and following_account
     sleep 5 # Not sure how much we should sleep here
     puts "#{follower} -> #{following}"
+    ufs.call(follower_account, following_account)
     fs.call(follower_account, following_account)
   else
     if follower_account
