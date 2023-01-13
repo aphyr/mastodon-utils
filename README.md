@@ -63,17 +63,9 @@ etc. We store this in a "Mastodon map", which you build once, then re-use.
 (spit "woof->bear.json" (json/generate-string woof->bear))
 ```
 
-Manually re-following at the rails console (`RAILS_ENV=production bin/rails console`):
 
-```rb
-local = Account.find_by(username: "aphyr", domain: nil)
-remote = Account.find_by(username: 'FourBitDaddy', domain: '4be
-ar.com')
-fs = FollowService.new
-fs.call(local, remote)
-```
-
-Iterating over [follower, following] pairs and re-following each
+Iterating over [follower, following] pairs and re-following each. Run this at
+the rails console (`RAILS_ENV=production bin/rails console`):
 
 ```rb
 fs = FollowService.new
